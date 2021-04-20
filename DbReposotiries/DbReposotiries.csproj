@@ -53,8 +53,32 @@
   <ItemGroup>
     <Compile Include="Configurations\BaseConfiguration.cs" />
     <Compile Include="Configurations\CustomerConfiguration.cs" />
+    <Compile Include="Configurations\ItemConfiguration.cs" />
     <Compile Include="Configurations\OrderConfiguration.cs" />
+    <Compile Include="Configurations\ProductConfigutation.cs" />
     <Compile Include="DbCustomerRepository.cs" />
+    <Compile Include="MigrationsContextFactory.cs" />
+    <Compile Include="Migrations\202104201021501_InitialCreate.cs" />
+    <Compile Include="Migrations\202104201021501_InitialCreate.designer.cs">
+      <DependentUpon>202104201021501_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104201033437_ChangeOrderDateOnOrder.cs" />
+    <Compile Include="Migrations\202104201033437_ChangeOrderDateOnOrder.designer.cs">
+      <DependentUpon>202104201033437_ChangeOrderDateOnOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104201046227_AddCustomersByGenderView.cs" />
+    <Compile Include="Migrations\202104201046227_AddCustomersByGenderView.designer.cs">
+      <DependentUpon>202104201046227_AddCustomersByGenderView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104201157456_ChangeNameOnItem.cs" />
+    <Compile Include="Migrations\202104201157456_ChangeNameOnItem.designer.cs">
+      <DependentUpon>202104201157456_ChangeNameOnItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104201203040_AddBarCodeToProduct.cs" />
+    <Compile Include="Migrations\202104201203040_AddBarCodeToProduct.designer.cs">
+      <DependentUpon>202104201203040_AddBarCodeToProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShopContext.cs" />
   </ItemGroup>
@@ -71,6 +95,23 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202104201021501_InitialCreate.resx">
+      <DependentUpon>202104201021501_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104201033437_ChangeOrderDateOnOrder.resx">
+      <DependentUpon>202104201033437_ChangeOrderDateOnOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104201046227_AddCustomersByGenderView.resx">
+      <DependentUpon>202104201046227_AddCustomersByGenderView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104201157456_ChangeNameOnItem.resx">
+      <DependentUpon>202104201157456_ChangeNameOnItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104201203040_AddBarCodeToProduct.resx">
+      <DependentUpon>202104201203040_AddBarCodeToProduct.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

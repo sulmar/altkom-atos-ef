@@ -22,6 +22,12 @@ namespace DbReposotiries
         public ShopContext(DbConnection connection, bool contextOwnsConnection)
             : base(connection, contextOwnsConnection)
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ShopContext, DbReposotiries.Migrations.Configuration>());
+        }
+
+        public ShopContext(string name)
+            : base(name)
+        {
 
         }
 

@@ -31,6 +31,8 @@ namespace ConsoleClient
             DbConnection connection = new SqlConnection(connectionString);
             ShopContext context = new ShopContext(connection, contextOwnsConnection: false);
 
+            
+
             Customer customer = new Customer { FirstName = "John", LastName = "Smith", Gender = Gender.Male };
 
             ICustomerRepository customerRepository = new DbCustomerRepository(context);
