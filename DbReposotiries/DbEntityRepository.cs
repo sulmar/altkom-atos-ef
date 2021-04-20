@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 
 namespace DbReposotiries
@@ -22,11 +23,14 @@ namespace DbReposotiries
         {
             Console.WriteLine(context.Entry(entity).State);
 
-           
-
             entities.Add(entity);
 
             var entries = context.ChangeTracker.Entries();
+
+            foreach (DbEntityEntry entry in entries)
+            {
+                
+            }
 
             Console.WriteLine(context.Entry(entity).State);
 
