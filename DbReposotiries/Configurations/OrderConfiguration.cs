@@ -12,7 +12,6 @@ namespace DbReposotiries.Configurations
     {
         public OrderConfiguration()
         {
-            this.Property(p => p.OrderDate).HasColumnType("datetime2");
             this.Property(p => p.OrderNumber).HasMaxLength(20).IsUnicode(false).IsRequired();
         }
     }

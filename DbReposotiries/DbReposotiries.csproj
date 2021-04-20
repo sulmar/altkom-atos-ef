@@ -56,6 +56,8 @@
     <Compile Include="Configurations\ItemConfiguration.cs" />
     <Compile Include="Configurations\OrderConfiguration.cs" />
     <Compile Include="Configurations\ProductConfigutation.cs" />
+    <Compile Include="Conventions\CityConvention.cs" />
+    <Compile Include="Conventions\DateTime2Convention.cs" />
     <Compile Include="DbCustomerRepository.cs" />
     <Compile Include="MigrationsContextFactory.cs" />
     <Compile Include="Migrations\202104201021501_InitialCreate.cs" />
@@ -77,6 +79,10 @@
     <Compile Include="Migrations\202104201203040_AddBarCodeToProduct.cs" />
     <Compile Include="Migrations\202104201203040_AddBarCodeToProduct.designer.cs">
       <DependentUpon>202104201203040_AddBarCodeToProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104201214248_AddCityConvention.cs" />
+    <Compile Include="Migrations\202104201214248_AddCityConvention.designer.cs">
+      <DependentUpon>202104201214248_AddCityConvention.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -111,6 +117,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202104201203040_AddBarCodeToProduct.resx">
       <DependentUpon>202104201203040_AddBarCodeToProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104201214248_AddCityConvention.resx">
+      <DependentUpon>202104201214248_AddCityConvention.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

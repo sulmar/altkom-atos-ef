@@ -1,4 +1,5 @@
 ﻿using DbReposotiries.Configurations;
+using DbReposotiries.Conventions;
 using Models;
 using System;
 using System.Collections.Generic;
@@ -52,6 +53,11 @@ namespace DbReposotiries
             // EF Core
             // modelBuilder.ApplyConfiguration(new CustomerConfiguration());
             // modelBuilder.ApplyConfigurationFromAssembly(typeof(CustomerConfiguration).Assembly);
+
+            modelBuilder.Conventions.Add(new DateTime2Convention());
+            modelBuilder.Conventions.Add(new CityConvention());
+
+            // modelBuilder.Conventions.AddFromAssembly(typeof(DateTime2Convention).Assembly);
 
         }
 

@@ -17,7 +17,6 @@ namespace DbReposotiries.Configurations
             this.Property(p => p.FirstName).HasMaxLength(50).IsRequired();
             this.Property(p => p.LastName).HasMaxLength(50).IsRequired();
             this.Property(p => p.Email).HasMaxLength(250);
-            this.Property(p => p.DateOfBirth).HasColumnType("datetime2");
         }
 
         // EF Core
