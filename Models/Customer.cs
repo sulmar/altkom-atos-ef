@@ -13,5 +13,11 @@ namespace Models
         public Address ShipAddress { get; set; }
         public Address InvoiceAddress { get; set; }
         public bool IsRemoved { get; set; }
+
+        public Customer()
+        {
+            ShipAddress = new Address();
+            InvoiceAddress = new Address();
+        }
     }
 }

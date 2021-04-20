@@ -20,10 +20,25 @@ namespace DbReposotiries
         public DbSet<Product> Products { get; set; }
         public DbSet<Service> Services { get; set; }
 
+
         public ShopContext(DbConnection connection, bool contextOwnsConnection)
+            : this(new MigrateDatabaseToLatestVersion<ShopContext, DbReposotiries.Migrations.Configuration>(), connection, contextOwnsConnection)
+        {
+
+        }
+
+        public ShopContext(IDatabaseInitializer<ShopContext> strategy, DbConnection connection, bool contextOwnsConnection)
             : base(connection, contextOwnsConnection)
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ShopContext, DbReposotiries.Migrations.Configuration>());
+            Database.SetInitializer(strategy);
+
+            // Database.SetInitializer(new CreateDatabaseIfNotExists<ShopContext>());
+
+            // Database.SetInitializer(new MigrateDatabaseToLatestVersion<ShopContext, DbReposotiries.Migrations.Configuration>());
+
+            // Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ShopContext>());
+
+            // Database.SetInitializer(new DropCreateDatabaseAlways<ShopContext>());
         }
 
         public ShopContext(string name)

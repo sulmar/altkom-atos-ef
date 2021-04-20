@@ -59,6 +59,8 @@
     <Compile Include="Conventions\CityConvention.cs" />
     <Compile Include="Conventions\DateTime2Convention.cs" />
     <Compile Include="DbCustomerRepository.cs" />
+    <Compile Include="DbEntityRepository.cs" />
+    <Compile Include="DbOrderRepository.cs" />
     <Compile Include="MigrationsContextFactory.cs" />
     <Compile Include="Migrations\202104201021501_InitialCreate.cs" />
     <Compile Include="Migrations\202104201021501_InitialCreate.designer.cs">
