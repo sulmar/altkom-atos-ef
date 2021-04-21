@@ -1,5 +1,7 @@
 ﻿using IRepositories;
 using Models;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DbReposotiries
 {
@@ -7,6 +9,17 @@ namespace DbReposotiries
     {
         public DbOrderRepository(ShopContext context) : base(context)
         {
+        }
+
+        public void AddRange(IEnumerable<Order> orders)
+        {
+            entities.AddRange(orders);
+
+            var entries = context.ChangeTracker.Entries()
+                .Select(e => new { e.Entity.GetType().Name, e.State});
+
+            
+            context.SaveChanges();
         }
     }
 }

@@ -20,7 +20,9 @@ namespace ConsoleClient
         {
             Console.WriteLine("Hello World!");
 
-            AddRangeCustomersTest();
+            AddRangeOrdersTest();
+
+         //   AddRangeCustomersTest();
 
             // AddCustomerTest();
 
@@ -33,6 +35,34 @@ namespace ConsoleClient
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
 
+        }
+
+        private static void AddRangeOrdersTest()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["ShopConnectionString"].ConnectionString;
+            DbConnection connection = new SqlConnection(connectionString);
+
+            ShopContext context = new ShopContext(connection, contextOwnsConnection: false);
+
+            ICustomerRepository customerRepository = new DbCustomerRepository(context);
+
+            var customers = customerRepository.Get();
+
+            ProductFaker productFaker = new ProductFaker();
+            var products = productFaker.Generate(50);
+
+            ServiceFaker serviceFaker = new ServiceFaker();
+            var services = serviceFaker.Generate(10);
+
+            // Union - suma zbiorów
+            var items = products.OfType<Item>().Union(services);
+
+            OrderFaker orderFaker = new OrderFaker(customers, new OrderDetailFaker(items));
+
+            var orders = orderFaker.Generate(10);
+
+            IOrderRepository orderRepository = new DbOrderRepository(context);
+            orderRepository.AddRange(orders);
         }
 
         private static void AddRangeCustomersTest()

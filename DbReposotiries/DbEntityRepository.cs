@@ -10,7 +10,7 @@ namespace DbReposotiries
     public class DbEntityRepository<TEntity> : IEntityRepository<TEntity>
         where TEntity : class
     {
-        private readonly ShopContext context;
+        protected readonly ShopContext context;
 
         protected DbSet<TEntity> entities => context.Set<TEntity>();
 

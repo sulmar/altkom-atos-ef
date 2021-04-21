@@ -52,7 +52,7 @@ namespace DbReposotiries
 
         public IEnumerable<Customer> Get()
         {
-            return context.Customers.AsNoTracking().ToList();
+            return context.Customers.ToList();
         }
 
         public Customer Get(int id)
