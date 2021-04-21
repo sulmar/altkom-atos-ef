@@ -62,6 +62,15 @@ namespace DbReposotiries
             // return context.Customers.SingleOrDefault(p => p.Id == id);
         }
 
+        public IEnumerable<CustomerByGender> GetByGenders()
+        {
+            var query = context.Customers
+                .GroupBy(c => c.Gender)
+                .Select(g => new CustomerByGender { Gender = g.Key, Quantity = g.Count() })                ;
+
+            return query.ToList();
+        }
+
         public void Remove(int id)
         {
             //Customer customer = Get(id);

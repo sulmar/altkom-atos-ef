@@ -10,5 +10,6 @@ namespace IRepositories
         void AddRange(IEnumerable<Order> orders);
         IEnumerable<Order> Calculate();
         IEnumerable<Order> Get(OrderSearchCriteria searchCriteria);
+        IEnumerable<Order> GetActive();
     }
 }

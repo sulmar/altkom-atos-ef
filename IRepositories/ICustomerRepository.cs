@@ -8,5 +8,8 @@ namespace IRepositories
     {
         void AddRange(IEnumerable<Customer> customers);
         void RemoveRange(IEnumerable<Customer> customers);
+        IEnumerable<CustomerByGender> GetByGenders();
+
+
     }
 }

@@ -21,7 +21,9 @@ namespace ConsoleClient
         {
             Console.WriteLine("Hello World!");
 
-            GetOrderSearchCriteriaTest();
+            GetCustomersByGenderTest();
+
+            // GetOrderSearchCriteriaTest();
 
             // CalculateOrdersTest();
 
@@ -42,6 +44,19 @@ namespace ConsoleClient
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
 
+        }
+
+
+
+        private static void GetCustomersByGenderTest()
+        {
+            ShopContextFactory shopContextFactory = new ShopContextFactory();
+            ShopContext context = shopContextFactory.Create();
+
+
+            ICustomerRepository customerRepository = new DbCustomerRepository(context);
+
+            var customersByGender = customerRepository.GetByGenders();
         }
 
         private static void GetOrderSearchCriteriaTest()

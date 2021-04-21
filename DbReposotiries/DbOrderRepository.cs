@@ -92,7 +92,7 @@ namespace DbReposotiries
         {
             var query = from p in context.Orders
                             where p.Status == searchCriteria.Status
-                            orderby p.OrderDate
+                            orderby p.OrderDate, p.OrderNumber
                             select p;
 
             return query.ToList();
@@ -130,11 +130,27 @@ namespace DbReposotiries
                 query = query.Where(p => p.Status == searchCriteria.Status);
             }
 
+            // uwaga: błędne!
+            // query = query.OrderBy(p => p.OrderDate).OrderBy(p => p.OrderNumber);
+
+            query = query.OrderBy(p => p.OrderDate).ThenBy(p=>p.OrderNumber);
+
             return query.ToList();
 
 
         }
 
+        public IEnumerable<Order> GetActive()
+        {
+            var activeCustomers = context.Customers.Where(c=>!c.IsRemoved).ToList();
 
+            var woman = context.Customers.Where(c => c.Gender == Gender.Female);
+
+            var man = context.Customers.Where(c => c.Gender == Gender.Male);
+
+            var query = activeCustomers.Except(woman).Union(man);
+           
+            throw new NotImplementedException();
+        }
     }
 }

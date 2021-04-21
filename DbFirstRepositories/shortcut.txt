@@ -1,0 +1,1 @@
+CTRL + SHIFT + R (czysci sql intelicense)

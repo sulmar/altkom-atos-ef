@@ -20,6 +20,8 @@ namespace ConsoleClient
 
             ShopContext context = new ShopContext(connection, contextOwnsConnection: false);
 
+            context.Database.Log += Console.WriteLine;
+
             return context;
 
         }
