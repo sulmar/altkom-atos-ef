@@ -61,6 +61,7 @@
     <Compile Include="DbCustomerRepository.cs" />
     <Compile Include="DbEntityRepository.cs" />
     <Compile Include="DbOrderRepository.cs" />
+    <Compile Include="DbProductRepository.cs" />
     <Compile Include="MigrationsContextFactory.cs" />
     <Compile Include="Migrations\202104201021501_InitialCreate.cs" />
     <Compile Include="Migrations\202104201021501_InitialCreate.designer.cs">
@@ -89,6 +90,10 @@
     <Compile Include="Migrations\202104210807524_AddPeselToCustomer.cs" />
     <Compile Include="Migrations\202104210807524_AddPeselToCustomer.designer.cs">
       <DependentUpon>202104210807524_AddPeselToCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104211338448_AddGetProductsByColor.cs" />
+    <Compile Include="Migrations\202104211338448_AddGetProductsByColor.designer.cs">
+      <DependentUpon>202104211338448_AddGetProductsByColor.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -129,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202104210807524_AddPeselToCustomer.resx">
       <DependentUpon>202104210807524_AddPeselToCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104211338448_AddGetProductsByColor.resx">
+      <DependentUpon>202104211338448_AddGetProductsByColor.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -21,7 +21,11 @@ namespace ConsoleClient
         {
             Console.WriteLine("Hello World!");
 
-            GetCustomersByGenderTest();
+            GetProductByColorTest();
+
+            // GetProductByBarCodeTest();
+
+            // GetCustomersByGenderTest();
 
             // GetOrderSearchCriteriaTest();
 
@@ -46,7 +50,33 @@ namespace ConsoleClient
 
         }
 
+        private static void GetProductByBarCodeTest()
+        {
+            ShopContextFactory shopContextFactory = new ShopContextFactory();
+            ShopContext context = shopContextFactory.Create();
 
+            IProductRepository productRepository = new DbProductRepository(context);
+
+            string barcode = "3845437691226;DROP VIEW CustomersByGender";
+
+            Product product = productRepository.GetByBarCode(barcode);
+
+            Console.WriteLine(product.Name);
+        }
+
+        private static void GetProductByColorTest()
+        {
+            ShopContextFactory shopContextFactory = new ShopContextFactory();
+            ShopContext context = shopContextFactory.Create();
+
+            IProductRepository productRepository = new DbProductRepository(context);
+
+            string color = "red' OR 1=1 --";
+
+            var products = productRepository.GetByColor(color);
+
+            
+        }
 
         private static void GetCustomersByGenderTest()
         {
