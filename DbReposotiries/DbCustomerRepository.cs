@@ -31,9 +31,28 @@ namespace DbReposotiries
             Console.WriteLine(context.Entry(customer).State);
         }
 
+        public void AddRange(IEnumerable<Customer> customers)
+        {
+            context.Configuration.AutoDetectChangesEnabled = false;
+
+            foreach (var customer in customers)
+            {
+                context.Customers.Add(customer);
+            }
+
+            context.ChangeTracker.DetectChanges();
+
+            context.SaveChanges();
+
+            context.Configuration.AutoDetectChangesEnabled = true;
+
+            // context.Customers.AddRange(customers);
+            // context.SaveChanges();
+        }
+
         public IEnumerable<Customer> Get()
         {
-            return context.Customers.ToList();
+            return context.Customers.AsNoTracking().ToList();
         }
 
         public Customer Get(int id)
@@ -71,6 +90,12 @@ namespace DbReposotiries
 
             context.SaveChanges();
             Console.WriteLine(context.Entry(customer).State);
+        }
+
+        public void RemoveRange(IEnumerable<Customer> customers)
+        {
+            context.Customers.RemoveRange(customers);
+            context.SaveChanges();
         }
 
         public void Update(Customer customer)

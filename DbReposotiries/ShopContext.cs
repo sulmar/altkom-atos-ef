@@ -32,6 +32,9 @@ namespace DbReposotiries
         {
             Database.SetInitializer(strategy);
 
+
+            // this.Configuration.AutoDetectChangesEnabled = false;
+
             // Database.SetInitializer(new CreateDatabaseIfNotExists<ShopContext>());
 
             // Database.SetInitializer(new MigrateDatabaseToLatestVersion<ShopContext, DbReposotiries.Migrations.Configuration>());
