@@ -7,9 +7,9 @@ namespace Models
     {
         public DateTime OrderDate { get; set; }
         public string OrderNumber { get; set; }
-        public Customer Customer { get; set; }
+        public virtual Customer Customer { get; set; } // Navigation Property
         public OrderStatus Status { get; set; }
-        public ICollection<OrderDetail> Details { get; set; }
+        public  ICollection<OrderDetail> Details { get; set; } // Navigation Property
 
         public Order()
         {

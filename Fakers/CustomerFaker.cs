@@ -26,6 +26,7 @@ namespace Fakers
             RuleFor(p => p.IsRemoved, f => f.Random.Bool(0.3f));
             RuleFor(p => p.Pesel, f => f.Person.Pesel());
             Ignore(p => p.IsSelected);
+            Ignore(p => p.Avatar);
 
         }
     }

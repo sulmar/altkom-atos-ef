@@ -20,9 +20,13 @@ namespace ConsoleClient
         {
             Console.WriteLine("Hello World!");
 
-            AddRangeOrdersTest();
+            CalculateOrdersTest();
 
-         //   AddRangeCustomersTest();
+            // GetOrdersTest();
+
+            // AddRangeOrdersTest();
+
+            //   AddRangeCustomersTest();
 
             // AddCustomerTest();
 
@@ -37,12 +41,28 @@ namespace ConsoleClient
 
         }
 
+        private static void GetOrdersTest()
+        {
+            ShopContextFactory shopContextFactory = new ShopContextFactory();
+            ShopContext context = shopContextFactory.Create();
+
+            IOrderRepository orderRepository = new DbOrderRepository(context);
+            var orders = orderRepository.Get();
+        }
+
+        private static void CalculateOrdersTest()
+        {
+            ShopContextFactory shopContextFactory = new ShopContextFactory();
+            ShopContext context = shopContextFactory.Create();
+
+            IOrderRepository orderRepository = new DbOrderRepository(context);
+            var orders = orderRepository.Calculate();
+        }
+
         private static void AddRangeOrdersTest()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["ShopConnectionString"].ConnectionString;
-            DbConnection connection = new SqlConnection(connectionString);
-
-            ShopContext context = new ShopContext(connection, contextOwnsConnection: false);
+            ShopContextFactory shopContextFactory = new ShopContextFactory();
+            ShopContext context = shopContextFactory.Create();
 
             ICustomerRepository customerRepository = new DbCustomerRepository(context);
 
@@ -71,10 +91,8 @@ namespace ConsoleClient
 
             var customers = customerFaker.Generate(100);
 
-            string connectionString = ConfigurationManager.ConnectionStrings["ShopConnectionString"].ConnectionString;
-            DbConnection connection = new SqlConnection(connectionString);
-
-            ShopContext context = new ShopContext(connection, contextOwnsConnection: false);
+            ShopContextFactory shopContextFactory = new ShopContextFactory();
+            ShopContext context = shopContextFactory.Create();
 
             ICustomerRepository customerRepository = new DbCustomerRepository(context);
 
@@ -84,10 +102,8 @@ namespace ConsoleClient
 
         private static void AddOrderTest()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["ShopConnectionString"].ConnectionString;
-            DbConnection connection = new SqlConnection(connectionString);
-
-            ShopContext context = new ShopContext(connection, contextOwnsConnection: false);
+            ShopContextFactory shopContextFactory = new ShopContextFactory();
+            ShopContext context = shopContextFactory.Create();
 
             ICustomerRepository customerRepository = new DbCustomerRepository(context);
             IOrderRepository orderRepository = new DbOrderRepository(context);
@@ -111,10 +127,8 @@ namespace ConsoleClient
 
         private static void AddCustomerTest()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["ShopConnectionString"].ConnectionString;
-            DbConnection connection = new SqlConnection(connectionString);
-
-            ShopContext context = new ShopContext(connection, contextOwnsConnection: false);
+            ShopContextFactory shopContextFactory = new ShopContextFactory();
+            ShopContext context = shopContextFactory.Create();
 
             Customer customer = new Customer
             {
@@ -132,10 +146,9 @@ namespace ConsoleClient
 
         private static void RemoveCustomerTest()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["ShopConnectionString"].ConnectionString;
-            DbConnection connection = new SqlConnection(connectionString);
+            ShopContextFactory shopContextFactory = new ShopContextFactory();
+            ShopContext context = shopContextFactory.Create();
 
-            ShopContext context = new ShopContext(connection, contextOwnsConnection: false);
             ICustomerRepository customerRepository = new DbCustomerRepository(context);
 
             customerRepository.Remove(3);
@@ -143,10 +156,9 @@ namespace ConsoleClient
 
         private static void UpdateCustomerTest()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["ShopConnectionString"].ConnectionString;
-            DbConnection connection = new SqlConnection(connectionString);
+            ShopContextFactory shopContextFactory = new ShopContextFactory();
+            ShopContext context = shopContextFactory.Create();
 
-            ShopContext context = new ShopContext(connection, contextOwnsConnection: false);
             ICustomerRepository customerRepository = new DbCustomerRepository(context);
 
             Customer customer = new Customer { Id = 3, FirstName = "Jan", LastName = "Nowak" };

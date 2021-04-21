@@ -15,6 +15,8 @@ namespace Models
         public string Pesel { get; set; }
         public bool IsRemoved { get; set; }
 
+        public virtual byte[] Avatar { get; set; }
+
         public bool IsSelected { get; set; }
 
         public Customer()

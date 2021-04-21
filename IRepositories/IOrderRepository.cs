@@ -6,5 +6,6 @@ namespace IRepositories
     public interface IOrderRepository : IEntityRepository<Order>
     {
         void AddRange(IEnumerable<Order> orders);
+        IEnumerable<Order> Calculate();
     }
 }

@@ -23,6 +23,7 @@ namespace DbReposotiries.Configurations
             this.HasIndex(p => p.Pesel).IsUnique();
 
             this.Ignore(p => p.IsSelected);
+            this.Ignore(p => p.Avatar);
         }
 
         // EF Core
