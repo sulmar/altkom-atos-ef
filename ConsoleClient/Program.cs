@@ -2,6 +2,7 @@
 using Fakers;
 using IRepositories;
 using Models;
+using Models.SearchCriterias;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -20,7 +21,9 @@ namespace ConsoleClient
         {
             Console.WriteLine("Hello World!");
 
-            CalculateOrdersTest();
+            GetOrderSearchCriteriaTest();
+
+            // CalculateOrdersTest();
 
             // GetOrdersTest();
 
@@ -38,6 +41,23 @@ namespace ConsoleClient
 
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
+
+        }
+
+        private static void GetOrderSearchCriteriaTest()
+        {
+            ShopContextFactory shopContextFactory = new ShopContextFactory();
+            ShopContext context = shopContextFactory.Create();
+
+            OrderSearchCriteria searchCriteria = new OrderSearchCriteria
+            {
+                From = DateTime.Parse("2021-01-01"),
+                To = DateTime.Parse("2021-05-01"),
+            };
+
+            IOrderRepository orderRepository = new DbOrderRepository(context);
+
+            var orders = orderRepository.Get(searchCriteria);
 
         }
 

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Data.Entity;
 using System.Threading;
 using System;
+using Models.SearchCriterias;
 
 namespace DbReposotiries
 {
@@ -86,5 +87,54 @@ namespace DbReposotiries
 
             return orders;
         }
+
+        public IEnumerable<Order> Get2(OrderSearchCriteria searchCriteria)
+        {
+            var query = from p in context.Orders
+                            where p.Status == searchCriteria.Status
+                            orderby p.OrderDate
+                            select p;
+
+            return query.ToList();
+        }
+
+        public IEnumerable<Order> Get(OrderSearchCriteria searchCriteria)
+        {
+            // zła praktyka
+            //return entities
+            //    .Where(p => searchCriteria.From.HasValue && p.OrderDate >= searchCriteria.From && searchCriteria.To.HasValue && p.OrderDate <= searchCriteria.To)
+            //    .Where(p => p.OrderNumber.StartsWith(searchCriteria.OrderNumber))
+            //    .Where(p=> searchCriteria.Status.HasValue && p.Status == searchCriteria.Status)
+            //    .ToList();
+
+
+            IQueryable<Order> query = context.Orders.AsQueryable();
+
+            if (searchCriteria.From.HasValue)
+            {
+                query = query.Where(p => p.OrderDate >= searchCriteria.From);
+            }
+
+            if (searchCriteria.To.HasValue)
+            {
+                query = query.Where(p => p.OrderDate <= searchCriteria.To);
+            }
+
+            if (!string.IsNullOrWhiteSpace(searchCriteria.OrderNumber))
+            {
+                query = query.Where(p => p.OrderNumber.StartsWith(searchCriteria.OrderNumber));
+            }
+
+            if (searchCriteria.Status.HasValue)
+            {
+                query = query.Where(p => p.Status == searchCriteria.Status);
+            }
+
+            return query.ToList();
+
+
+        }
+
+
     }
 }
