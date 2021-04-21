@@ -83,6 +83,26 @@ namespace ConsoleClient
 
             IOrderRepository orderRepository = new DbOrderRepository(context);
             var orders = orderRepository.Get();
+
+            if (orders.Any())
+            {
+
+            }
+            else
+            {
+                Console.WriteLine("Brak zamówień");
+            }
+
+
+            if (orders.Any(c=>c.Customer.Gender == Gender.Female))
+            {
+
+            }
+
+            if (orders.All(c=>c.Customer.Gender == Gender.Male))
+            {
+
+            }
         }
 
         private static void CalculateOrdersTest()
