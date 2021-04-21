@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleClient", "ConsoleClient\ConsoleClient.csproj", "{C0208AD5-FB7B-4C9A-9664-BACB2300CDBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IRepositories", "IRepositories\IRepositories.csproj", "{BCE47390-5F3A-4B14-A70B-46A8B365AB4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IRepositories", "IRepositories\IRepositories.csproj", "{BCE47390-5F3A-4B14-A70B-46A8B365AB4B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbReposotiries", "DbReposotiries\DbReposotiries.csproj", "{77E08216-90E4-4E30-8090-6814D8609B42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbFirstRepositories", "DbFirstRepositories\DbFirstRepositories.csproj", "{458A9447-013C-47C4-993A-6AB837691B2C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{77E08216-90E4-4E30-8090-6814D8609B42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77E08216-90E4-4E30-8090-6814D8609B42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77E08216-90E4-4E30-8090-6814D8609B42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{458A9447-013C-47C4-993A-6AB837691B2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{458A9447-013C-47C4-993A-6AB837691B2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{458A9447-013C-47C4-993A-6AB837691B2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{458A9447-013C-47C4-993A-6AB837691B2C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
