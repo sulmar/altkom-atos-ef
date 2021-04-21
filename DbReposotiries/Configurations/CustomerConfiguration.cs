@@ -17,6 +17,12 @@ namespace DbReposotiries.Configurations
             this.Property(p => p.FirstName).HasMaxLength(50).IsRequired();
             this.Property(p => p.LastName).HasMaxLength(50).IsRequired();
             this.Property(p => p.Email).HasMaxLength(250);
+
+            this.Property(p => p.Pesel).HasMaxLength(11).IsFixedLength().IsUnicode(false);
+
+            this.HasIndex(p => p.Pesel).IsUnique();
+
+            this.Ignore(p => p.IsSelected);
         }
 
         // EF Core

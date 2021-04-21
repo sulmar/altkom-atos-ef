@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbReposotiries", "DbReposot
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbFirstRepositories", "DbFirstRepositories\DbFirstRepositories.csproj", "{458A9447-013C-47C4-993A-6AB837691B2C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fakers", "Fakers\Fakers.csproj", "{137EAB67-D278-4F3D-A1B2-73B73AB07EA1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{458A9447-013C-47C4-993A-6AB837691B2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{458A9447-013C-47C4-993A-6AB837691B2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{458A9447-013C-47C4-993A-6AB837691B2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{137EAB67-D278-4F3D-A1B2-73B73AB07EA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{137EAB67-D278-4F3D-A1B2-73B73AB07EA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{137EAB67-D278-4F3D-A1B2-73B73AB07EA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{137EAB67-D278-4F3D-A1B2-73B73AB07EA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

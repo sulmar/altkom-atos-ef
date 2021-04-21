@@ -12,7 +12,10 @@ namespace Models
         public DateTime DateOfBirth { get; set; }
         public Address ShipAddress { get; set; }
         public Address InvoiceAddress { get; set; }
+        public string Pesel { get; set; }
         public bool IsRemoved { get; set; }
+
+        public bool IsSelected { get; set; }
 
         public Customer()
         {

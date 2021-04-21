@@ -1,4 +1,5 @@
 ﻿using DbReposotiries;
+using Fakers;
 using IRepositories;
 using Models;
 using System;
@@ -19,9 +20,11 @@ namespace ConsoleClient
         {
             Console.WriteLine("Hello World!");
 
-             AddCustomerTest();
+            AddRangeCustomersTest();
 
-            AddOrderTest();
+            // AddCustomerTest();
+
+            //AddOrderTest();
 
             // RemoveCustomerTest();
 
@@ -32,6 +35,22 @@ namespace ConsoleClient
 
         }
 
+        private static void AddRangeCustomersTest()
+        {
+            CustomerFaker customerFaker = new CustomerFaker(new AddressFaker());
+
+            var customers = customerFaker.Generate(100);
+
+            string connectionString = ConfigurationManager.ConnectionStrings["ShopConnectionString"].ConnectionString;
+            DbConnection connection = new SqlConnection(connectionString);
+
+            ShopContext context = new ShopContext(connection, contextOwnsConnection: false);
+
+            ICustomerRepository customerRepository = new DbCustomerRepository(context);
+
+            customerRepository.AddRange(customers);
+
+        }
 
         private static void AddOrderTest()
         {

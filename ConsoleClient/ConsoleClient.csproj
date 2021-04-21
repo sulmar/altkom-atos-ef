@@ -51,6 +51,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Bogus, Version=33.0.2.0, Culture=neutral, PublicKeyToken=fa1bb3f3f218129a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Bogus.33.0.2\lib\net40\Bogus.dll</HintPath>
+    </Reference>
+    <Reference Include="Bogus.Extensions.Poland, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sulmar.Bogus.Extensions.Poland.1.0.0\lib\netstandard2.0\Bogus.Extensions.Poland.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -80,6 +86,10 @@
     <ProjectReference Include="..\DbReposotiries\DbReposotiries.csproj">
       <Project>{77e08216-90e4-4e30-8090-6814d8609b42}</Project>
       <Name>DbReposotiries</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fakers\Fakers.csproj">
+      <Project>{137EAB67-D278-4F3D-A1B2-73B73AB07EA1}</Project>
+      <Name>Fakers</Name>
     </ProjectReference>
     <ProjectReference Include="..\IRepositories\IRepositories.csproj">
       <Project>{bce47390-5f3a-4b14-a70b-46a8b365ab4b}</Project>
