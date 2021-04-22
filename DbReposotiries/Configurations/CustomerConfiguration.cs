@@ -14,9 +14,10 @@ namespace DbReposotiries.Configurations
     {
         public CustomerConfiguration()
         {
-            this.Property(p => p.FirstName).HasMaxLength(50).IsRequired();
+            this.Property(p => p.FirstName).HasMaxLength(50).IsRequired().IsConcurrencyToken();
             this.Property(p => p.LastName).HasMaxLength(50).IsRequired();
             this.Property(p => p.Email).HasMaxLength(250);
+            this.Property(p => p.Gender).IsConcurrencyToken();
 
             this.Property(p => p.Pesel).HasMaxLength(11).IsFixedLength().IsUnicode(false);
 

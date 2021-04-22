@@ -3,6 +3,7 @@ using Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -90,7 +91,7 @@ namespace DbReposotiries
         //    context.Configuration.AutoDetectChangesEnabled = true;
         //}
 
-       
+
 
 
         public void Remove(int id)
@@ -100,7 +101,7 @@ namespace DbReposotiries
             // RemoveTransactionNative(id);
         }
 
-       
+
 
         // Transakcje rozproszone
         private void RemoveTransactionScope(int id)
@@ -133,9 +134,9 @@ namespace DbReposotiries
                     scope.Complete(); // ustawiania flaga 
                 } // Dispose - Commit // Rollback zależnie od flagi
             }
-            catch(Exception)
+            catch (Exception)
             {
-                
+
             }
 
         }
@@ -209,42 +210,50 @@ namespace DbReposotiries
             context.SaveChanges();
         }
 
+        //public void Update(Customer customer)
+        //{
+        //    Console.WriteLine(context.Entry(customer).State);
+
+        //    // EF Core
+        //    // context.Customers.Update(customer);
+
+        //    context.Customers.Attach(customer);
+
+        //    Console.WriteLine(context.Entry(customer).State);
+
+        //    context.Entry(customer).State = System.Data.Entity.EntityState.Modified;
+
+        //    Console.WriteLine(context.Entry(customer).State);
+
+        //    context.SaveChanges();
+
+        //    Console.WriteLine(context.Entry(customer).State);
+
+
+        //}
+
         public void Update(Customer customer)
         {
-            Console.WriteLine(context.Entry(customer).State);
+            Customer existingCustomer = Get(customer.Id);
 
-            // EF Core
-            // context.Customers.Update(customer);
+            Console.WriteLine("Please Enter key to update");
 
-            context.Customers.Attach(customer);
-
-            Console.WriteLine(context.Entry(customer).State);
-
-            context.Entry(customer).State = System.Data.Entity.EntityState.Modified;
-
-            Console.WriteLine(context.Entry(customer).State);
-
-            context.SaveChanges();
-
-            Console.WriteLine(context.Entry(customer).State);
-
-            //Customer existingCustomer = Get(customer.Id);
-
-            //Console.WriteLine(context.Entry(existingCustomer).State);
-
-            //existingCustomer.FirstName = customer.FirstName;
-
-            //Console.WriteLine(context.Entry(existingCustomer).State);
-
-            //existingCustomer.LastName = existingCustomer.LastName;
-
-            //Console.WriteLine(context.Entry(existingCustomer).State);
-
-            //context.SaveChanges();
-
-            //Console.WriteLine(context.Entry(existingCustomer).State);
+            Console.ReadLine();
 
 
+            existingCustomer.FirstName = customer.FirstName;
+
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+                Console.WriteLine("Ktoś już zmodyfikował tego klienta");
+                
+                // Pobranie encji z bazy danych
+                e.Entries.Single().Reload();
+            }
         }
     }
 }

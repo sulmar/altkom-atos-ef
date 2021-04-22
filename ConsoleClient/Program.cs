@@ -21,7 +21,10 @@ namespace ConsoleClient
         {
             Console.WriteLine("Hello World!");
 
-            RemoveCustomerTest();
+            
+            UpdateCustomerTest();
+
+            // RemoveCustomerTest();
 
             // GetProductByColorTest();
 
@@ -248,8 +251,15 @@ namespace ConsoleClient
 
             ICustomerRepository customerRepository = new DbCustomerRepository(context);
 
-            Customer customer = new Customer { Id = 3, FirstName = "Jan", LastName = "Nowak" };
 
+            Console.WriteLine("Type firstname: ");
+            string firstname = Console.ReadLine();
+
+            Customer customer = new Customer { Id = 225, FirstName = firstname, LastName = "Smith", Gender = Gender.Female };
+
+            Console.WriteLine(customer.FirstName);
+
+           
             customerRepository.Update(customer);
         }
     }
