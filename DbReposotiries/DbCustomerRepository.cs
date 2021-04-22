@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Transactions;
 
@@ -243,17 +244,29 @@ namespace DbReposotiries
 
             existingCustomer.FirstName = customer.FirstName;
 
-            try
+
+            bool saveFailed = false;
+
+            do
             {
-                context.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException e)
-            {
-                Console.WriteLine("Ktoś już zmodyfikował tego klienta");
-                
-                // Pobranie encji z bazy danych
-                e.Entries.Single().Reload();
-            }
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException e)
+                {
+                    saveFailed = true;
+
+                    Console.WriteLine("Ktoś już zmodyfikował tego klienta");
+
+                    // Pobranie encji z bazy danych
+                    e.Entries.Single().Reload();
+
+                    Console.WriteLine("Trying...");
+                    Thread.Sleep(TimeSpan.FromSeconds(1));
+                }
+
+            } while (saveFailed);
         }
     }
 }
