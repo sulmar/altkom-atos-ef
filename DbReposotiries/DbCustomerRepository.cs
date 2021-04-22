@@ -99,6 +99,7 @@ namespace DbReposotiries
 
             context.SaveChanges();
             Console.WriteLine(context.Entry(customer).State);
+
         }
 
         public void RemoveRange(IEnumerable<Customer> customers)
