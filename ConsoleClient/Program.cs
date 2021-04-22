@@ -238,7 +238,7 @@ namespace ConsoleClient
 
             ICustomerRepository customerRepository = new DbCustomerRepository(context);
 
-            customerRepository.Remove(208);
+            customerRepository.Remove(247);
         }
 
         private static void UpdateCustomerTest()

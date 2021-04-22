@@ -2,9 +2,11 @@
 using Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace DbReposotiries
 {
@@ -66,26 +68,139 @@ namespace DbReposotiries
         {
             var query = context.Customers
                 .GroupBy(c => c.Gender)
-                .Select(g => new CustomerByGender { Gender = g.Key, Quantity = g.Count() })                ;
+                .Select(g => new CustomerByGender { Gender = g.Key, Quantity = g.Count() });
 
             return query.ToList();
         }
 
+        //public void Remove(int id)
+        //{
+        //    Customer customer = new Customer { Id = id, IsRemoved = true };
+
+        //    context.Configuration.AutoDetectChangesEnabled = false;
+        //    context.Configuration.ValidateOnSaveEnabled = false;
+
+        //    context.Customers.Attach(customer);
+
+        //    context.Entry(customer).Property(p => p.IsRemoved).IsModified = true;
+
+        //    context.SaveChanges();
+
+        //    context.Configuration.ValidateOnSaveEnabled = true;
+        //    context.Configuration.AutoDetectChangesEnabled = true;
+        //}
+
+       
+
+
         public void Remove(int id)
         {
-            Customer customer = new Customer { Id = id, IsRemoved = true };
+            RemoveTransactionScope(id);
 
-            context.Configuration.AutoDetectChangesEnabled = false;
+            // RemoveTransactionNative(id);
+        }
+
+       
+
+        // Transakcje rozproszone
+        private void RemoveTransactionScope(int id)
+        {
+            Customer customer = new Customer { Id = id, IsRemoved = true };
             context.Configuration.ValidateOnSaveEnabled = false;
 
-            context.Customers.Attach(customer);
+            try
+            {
+                // Add reference: System.Transaction
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    context.Customers.Attach(customer);
 
-            context.Entry(customer).Property(p => p.IsRemoved).IsModified = true;
+                    context.Entry(customer).Property(p => p.IsRemoved).IsModified = true;
 
-            context.SaveChanges();
+                    context.SaveChanges();
+
+                    var orders = context.Orders.Where(o => o.Customer.Id == customer.Id).ToList();
+
+                    foreach (var order in orders)
+                    {
+                        order.Status = OrderStatus.Canceled;
+
+                        throw new Exception();
+                    }
+
+                    context.SaveChanges();
+
+                    scope.Complete(); // ustawiania flaga 
+                } // Dispose - Commit // Rollback zależnie od flagi
+            }
+            catch(Exception)
+            {
+                
+            }
+
+        }
+
+        // Transaction (natywne)
+        /*
+            declare @CustomerId int 
+            set @CustomerId = 247
+
+            begin tran
+
+                update dbo.Customers  
+                set IsRemoved = 1
+                where Id = @CustomerId
+
+                update dbo.Orders
+                set Status = 2
+                where Customer_Id = @CustomerId           
+
+            commit
+         */
+        private void RemoveTransactionNative(int id)
+        {
+            Customer customer = new Customer { Id = id, IsRemoved = true };
+            context.Configuration.ValidateOnSaveEnabled = false;
+
+
+            // begin tran
+            using (DbContextTransaction transaction = context.Database.BeginTransaction(isolationLevel: System.Data.IsolationLevel.ReadCommitted))
+            {
+                try
+                {
+                    // 1. update dbo.Customers  set IsRemoved = 1 where Id = @CustomerId
+
+                    context.Customers.Attach(customer);
+
+                    context.Entry(customer).Property(p => p.IsRemoved).IsModified = true;
+
+                    context.SaveChanges();
+
+                    // 2. update dbo.Orders set Status = 2 where Customer_Id = @CustomerId
+
+                    var orders = context.Orders.Where(o => o.Customer.Id == customer.Id).ToList();
+
+                    foreach (var order in orders)
+                    {
+                        order.Status = OrderStatus.Canceled;
+
+                        throw new Exception();
+                    }
+
+                    context.SaveChanges();
+
+                    // commit
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    // rollback
+                    transaction.Rollback();
+                }
+            }
 
             context.Configuration.ValidateOnSaveEnabled = true;
-            context.Configuration.AutoDetectChangesEnabled = true;
+
         }
 
         public void RemoveRange(IEnumerable<Customer> customers)
