@@ -107,6 +107,10 @@
     <Compile Include="Migrations\202104221231187_AddCreateOnAndModifyOnToBaseEntity.designer.cs">
       <DependentUpon>202104221231187_AddCreateOnAndModifyOnToBaseEntity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202104221359502_AddUsersAndRoles.cs" />
+    <Compile Include="Migrations\202104221359502_AddUsersAndRoles.designer.cs">
+      <DependentUpon>202104221359502_AddUsersAndRoles.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MyDbConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -156,6 +160,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202104221231187_AddCreateOnAndModifyOnToBaseEntity.resx">
       <DependentUpon>202104221231187_AddCreateOnAndModifyOnToBaseEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104221359502_AddUsersAndRoles.resx">
+      <DependentUpon>202104221359502_AddUsersAndRoles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

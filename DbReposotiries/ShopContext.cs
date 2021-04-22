@@ -23,6 +23,9 @@ namespace DbReposotiries
         public DbSet<Product> Products { get; set; }
         public DbSet<Service> Services { get; set; }
 
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
+
 
         public ShopContext(DbConnection connection, bool contextOwnsConnection)
             : this(new MigrateDatabaseToLatestVersion<ShopContext, DbReposotiries.Migrations.Configuration>(), connection, contextOwnsConnection)
@@ -90,7 +93,26 @@ namespace DbReposotiries
 
             // modelBuilder.Conventions.AddFromAssembly(typeof(DateTime2Convention).Assembly);
 
-            
+
+            // TPC (Table per Concrete)
+
+            //modelBuilder.Entity<Product>().Map(m =>
+            //{
+            //    m.MapInheritedProperties();
+            //    m.ToTable("Products");
+            //});
+
+            //modelBuilder.Entity<Service>().Map(m =>
+            //{
+            //    m.MapInheritedProperties();
+            //    m.ToTable("Services");
+            //});
+
+            // TPT (Table per Type)
+            //modelBuilder.Entity<Product>().ToTable("Products");
+            //modelBuilder.Entity<Service>().ToTable("Services");
+
+
 
         }
 
