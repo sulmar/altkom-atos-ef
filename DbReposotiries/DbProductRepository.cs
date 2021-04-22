@@ -76,5 +76,24 @@ namespace DbReposotiries
                 throw new ApplicationException("Błąd podczas dodawania produktu");
             }
         }
+
+        public override void Remove(int id)
+        {
+            Product product = new Product { Id = id };
+
+            Console.WriteLine(context.Entry(product).State);
+
+            context.Products.Attach(product);
+
+            Console.WriteLine(context.Entry(product).State);
+
+            context.Entry(product).State = System.Data.Entity.EntityState.Deleted;
+
+            Console.WriteLine(context.Entry(product).State);
+
+            context.SaveChanges();
+
+            Console.WriteLine(context.Entry(product).State);
+        }
     }
 }

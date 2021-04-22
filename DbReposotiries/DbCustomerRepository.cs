@@ -73,33 +73,19 @@ namespace DbReposotiries
 
         public void Remove(int id)
         {
-            //Customer customer = Get(id);
+            Customer customer = new Customer { Id = id, IsRemoved = true };
 
-            //Console.WriteLine(context.Entry(customer).State);
-
-            //context.Customers.Remove(customer);
-
-            //Console.WriteLine(context.Entry(customer).State);
-
-            //context.SaveChanges();
-
-            //Console.WriteLine(context.Entry(customer).State);
-
-            Customer customer = new Customer { Id = id };
-
-            Console.WriteLine(context.Entry(customer).State);
+            context.Configuration.AutoDetectChangesEnabled = false;
+            context.Configuration.ValidateOnSaveEnabled = false;
 
             context.Customers.Attach(customer);
 
-            Console.WriteLine(context.Entry(customer).State);
-
-            context.Entry(customer).State = System.Data.Entity.EntityState.Deleted;
-
-            Console.WriteLine(context.Entry(customer).State);
+            context.Entry(customer).Property(p => p.IsRemoved).IsModified = true;
 
             context.SaveChanges();
-            Console.WriteLine(context.Entry(customer).State);
 
+            context.Configuration.ValidateOnSaveEnabled = true;
+            context.Configuration.AutoDetectChangesEnabled = true;
         }
 
         public void RemoveRange(IEnumerable<Customer> customers)

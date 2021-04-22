@@ -21,7 +21,9 @@ namespace ConsoleClient
         {
             Console.WriteLine("Hello World!");
 
-            GetProductByColorTest();
+            RemoveCustomerTest();
+
+            // GetProductByColorTest();
 
             // GetProductByBarCodeTest();
 
@@ -41,7 +43,7 @@ namespace ConsoleClient
 
             //AddOrderTest();
 
-            // RemoveCustomerTest();
+             
 
             // UpdateCustomerTest();
 
@@ -236,7 +238,7 @@ namespace ConsoleClient
 
             ICustomerRepository customerRepository = new DbCustomerRepository(context);
 
-            customerRepository.Remove(3);
+            customerRepository.Remove(208);
         }
 
         private static void UpdateCustomerTest()
