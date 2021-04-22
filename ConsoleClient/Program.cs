@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Common;
 using System.Data.Entity;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
@@ -23,6 +24,8 @@ namespace ConsoleClient
         {
             Console.WriteLine("Hello World!");
 
+            DocumentationTest();
+
             // SyncTest();
 
             // TaskTest();
@@ -35,7 +38,7 @@ namespace ConsoleClient
             // GetServiceAsyncTest();
 
 
-           // TaskResultTest();
+            // TaskResultTest();
 
 
             // UpdateCustomerTest();
@@ -71,13 +74,77 @@ namespace ConsoleClient
 
         }
 
+        private static void DocumentationTest()
+        {
+            ShopContextFactory shopContextFactory = new ShopContextFactory();
+            ShopContext context = shopContextFactory.Create();
+
+            var metadata = context.ObjectContext.MetadataWorkspace;
+
+            // Storage
+            Console.WriteLine("######## Storage ########");
+            var items = metadata.GetItems<EntityType>(DataSpace.SSpace);
+
+            foreach (var item in items)
+            {
+                Console.WriteLine("----------------------------");
+                Console.WriteLine($"Table name {item.Name}");
+                Console.WriteLine("----------------------------");
+
+                Console.WriteLine("Keys");
+
+                foreach (var key in item.KeyMembers)
+                {
+                    Console.WriteLine($"{key.Name} {key.TypeUsage.EdmType.FullName}");
+                }
+
+                Console.WriteLine("Properties");
+                foreach (var property in item.Properties)
+                {
+                    Console.WriteLine($"{property.Name} {property.TypeUsage.EdmType.FullName}");
+                }
+            }
+
+            // Conceptual
+            Console.WriteLine("######## Conceptual ########");
+            var entities = metadata.GetItems<EntityType>(DataSpace.CSpace);
+
+            foreach (var entity in entities)
+            {
+                Console.WriteLine("----------------------------");
+                Console.WriteLine($"Entity name {entity.Name}");
+                Console.WriteLine("----------------------------");
+
+                Console.WriteLine("Keys");
+
+                foreach (var key in entity.KeyMembers)
+                {
+                    Console.WriteLine($"{key.Name} {key.TypeUsage.EdmType.FullName}");
+                }
+
+                Console.WriteLine("Properties");
+                foreach (var property in entity.Properties)
+                {
+                    Console.WriteLine($"{property.Name} {property.TypeUsage.EdmType.FullName}");
+                }
+
+                Console.WriteLine("Navigation Properties");
+                foreach (var property in entity.NavigationProperties)
+                {
+                    Console.WriteLine($"{property.Name} {property.TypeUsage.EdmType.FullName}");
+                }
+
+            }
+
+        }
+
         private static async Task GetServiceAsyncTest()
         {
             ShopContextFactory shopContextFactory = new ShopContextFactory();
             ShopContext context = shopContextFactory.Create();
             IServiceRepository serviceRepository = new DbServiceRepository(context);
 
-            var services =  await serviceRepository.GetAsync();
+            var services = await serviceRepository.GetAsync();
         }
 
         private static void SyncResultTest()
@@ -94,7 +161,7 @@ namespace ConsoleClient
 
         private static async Task AsyncAwaitTest()
         {
-            int size1 = await DownloadAsync("http://www.google.com");            
+            int size1 = await DownloadAsync("http://www.google.com");
             await SendAsync($"Pobrano {size1}");
 
             int size2 = await DownloadAsync("http://www.microsoft.com");
@@ -116,7 +183,7 @@ namespace ConsoleClient
                 .ContinueWith(t => Send($"Pobrano {t.Result}"));
         }
 
-       
+
 
         private static void TaskResultTest()
         {
@@ -124,23 +191,23 @@ namespace ConsoleClient
 
             int size1 = t1.Result; // blokuje UI
 
-            Task.Run(()=>Send($"Pobrano {size1}"));
+            Task.Run(() => Send($"Pobrano {size1}"));
 
             Task<int> t2 = Task<int>.Run(() => Download("http://www.microsoft.com"));
 
             int size2 = t2.Result;
 
-            Task.Run(()=>Send($"Pobrano {size2}"));
+            Task.Run(() => Send($"Pobrano {size2}"));
 
             Task<int> t3 = Task<int>.Run(() => Download("http://www.atos.net"));
 
-           int size3 = t3.Result;
+            int size3 = t3.Result;
 
-            Task.Run(()=>Send($"Pobrano {size3}"));
+            Task.Run(() => Send($"Pobrano {size3}"));
 
         }
 
-       
+
         private static Task<int> DownloadAsync(string url)
         {
             return Task.Run(() => Download(url));
@@ -184,10 +251,10 @@ namespace ConsoleClient
 
                 Task.Run(() => Send("Hello World!"));
             }
-            
+
             //Task task2 = new Task(() => Send("Hello EF!"));
             //Task task3 = new Task(() => Send("Hello .NET!"));
-            
+
             //task2.Start();
             //task3.Start();
 
@@ -200,7 +267,7 @@ namespace ConsoleClient
         }
 
         private static void Send(string message)
-        {            
+        {
             Console.WriteLine($"#{Thread.CurrentThread.ManagedThreadId} Sending {message}...");
 
             Thread.Sleep(TimeSpan.FromSeconds(5));
@@ -233,7 +300,7 @@ namespace ConsoleClient
 
             var products = productRepository.GetByColor(color);
 
-            
+
         }
 
         private static void GetCustomersByGenderTest()
@@ -282,12 +349,12 @@ namespace ConsoleClient
             }
 
 
-            if (orders.Any(c=>c.Customer.Gender == Gender.Female))
+            if (orders.Any(c => c.Customer.Gender == Gender.Female))
             {
 
             }
 
-            if (orders.All(c=>c.Customer.Gender == Gender.Male))
+            if (orders.All(c => c.Customer.Gender == Gender.Male))
             {
 
             }
@@ -356,7 +423,7 @@ namespace ConsoleClient
             Order order = new Order
             {
                 Customer = customer,
-                OrderNumber = "ZAM 001/2021"                
+                OrderNumber = "ZAM 001/2021"
             };
 
             Product product = new Product { Name = "EF6 in Action", BarCode = "54543534534", Color = "Black", UnitPrice = 199.99m };
@@ -412,7 +479,7 @@ namespace ConsoleClient
 
             Console.WriteLine(customer.FirstName);
 
-           
+
             customerRepository.Update(customer);
         }
     }

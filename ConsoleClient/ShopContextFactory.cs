@@ -20,7 +20,7 @@ namespace ConsoleClient
 
             ShopContext context = new ShopContext(connection, contextOwnsConnection: false);
 
-            context.Database.Log += Console.WriteLine;
+            context.Database.Log += Console.WriteLine; // nlog, serilog
 
             return context;
 
