@@ -17,6 +17,8 @@ namespace Models
 
         public virtual byte[] Avatar { get; set; }
 
+        public byte[] RowVersion { get; set; }
+
         public bool IsSelected { get; set; }
 
         public Customer()
