@@ -32,13 +32,13 @@ namespace ConsoleClient
 
             // Task.Run(()=>AsyncAwaitTest());
 
-            GetServiceAsyncTest();
+            // GetServiceAsyncTest();
 
 
            // TaskResultTest();
 
 
-            //  UpdateCustomerTest();
+            // UpdateCustomerTest();
 
             // RemoveCustomerTest();
 
@@ -52,7 +52,7 @@ namespace ConsoleClient
 
             // CalculateOrdersTest();
 
-            // GetOrdersTest();
+            GetOrdersTest();
 
             // AddRangeOrdersTest();
 

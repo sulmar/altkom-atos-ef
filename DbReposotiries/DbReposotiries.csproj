@@ -103,6 +103,10 @@
     <Compile Include="Migrations\202104220939325_AddRowVersionToCustomer.designer.cs">
       <DependentUpon>202104220939325_AddRowVersionToCustomer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202104221231187_AddCreateOnAndModifyOnToBaseEntity.cs" />
+    <Compile Include="Migrations\202104221231187_AddCreateOnAndModifyOnToBaseEntity.designer.cs">
+      <DependentUpon>202104221231187_AddCreateOnAndModifyOnToBaseEntity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MyDbConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -149,6 +153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202104220939325_AddRowVersionToCustomer.resx">
       <DependentUpon>202104220939325_AddRowVersionToCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104221231187_AddCreateOnAndModifyOnToBaseEntity.resx">
+      <DependentUpon>202104221231187_AddCreateOnAndModifyOnToBaseEntity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
