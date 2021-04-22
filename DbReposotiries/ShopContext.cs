@@ -77,6 +77,8 @@ namespace DbReposotiries
 
             // modelBuilder.Conventions.AddFromAssembly(typeof(DateTime2Convention).Assembly);
 
+            
+
         }
 
 
