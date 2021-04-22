@@ -30,10 +30,10 @@ namespace ConsoleClient
 
             // SyncResultTest();
 
-            Task.Run(()=>AsyncAwaitTest());
+            // Task.Run(()=>AsyncAwaitTest());
 
+            GetServiceAsyncTest();
 
-            Console.WriteLine("Add customer!");
 
            // TaskResultTest();
 
@@ -71,6 +71,15 @@ namespace ConsoleClient
 
         }
 
+        private static async Task GetServiceAsyncTest()
+        {
+            ShopContextFactory shopContextFactory = new ShopContextFactory();
+            ShopContext context = shopContextFactory.Create();
+            IServiceRepository serviceRepository = new DbServiceRepository(context);
+
+            var services =  await serviceRepository.GetAsync();
+        }
+
         private static void SyncResultTest()
         {
             int size1 = Download("http://www.google.com");
@@ -83,7 +92,7 @@ namespace ConsoleClient
             Send($"Pobrano {size3}");
         }
 
-        private static async void AsyncAwaitTest()
+        private static async Task AsyncAwaitTest()
         {
             int size1 = await DownloadAsync("http://www.google.com");            
             await SendAsync($"Pobrano {size1}");
